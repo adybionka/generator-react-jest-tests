@@ -1,45 +1,25 @@
-
-// Auto-generated do not edit
-
-
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-undef */
 import React from 'react';
-import renderer from 'react-test-renderer';
-import <%- filename %> from '<%-relativeFilePath%>';
+import { shallow } from 'enzyme';
+import <%- componentInfo.displayName %> from '<%-relativeFilePath%>';
+<% if (testDataImports.length) { %><%-testDataImports.join(';\n')%><%- ';\n' %><% } %>
+describe('<<%-componentInfo.displayName%> />', () => {
+  it('renders correctly', () => {
+    const node = (
+      <<%- componentInfo.displayName%>
+<%- componentProps.map(meta => {
+    if (typeof meta.propDefaultValue === 'object') {
+      return '        ' + meta.propName + '={' + meta.propDefaultValue[0] + '}'  ;
+    }
 
+    return "        " + meta.propName + ((meta.propType === 'string' && meta.propDefaultValue) ? ('=' + meta.propDefaultValue + '') : ("={" + meta.propDefaultValue + "}"));
+}).join('\n') %><% if (hasChildren) { %>
+      >
+        <div>I am children</div>
+      </<%- componentInfo.displayName%>><% } else { %>
+      /><% } %>
+    );
+    const wrapper = shallow(node);
 
-describe('<%-filename%> test', () => {
-  it('<%- filename %> should match snapshot', () => {
-    const component = renderer.create(<<%- filename%>
-      <%- componentProps.map(componentMeta => {
-        return ""+componentMeta.propName+"={"+
-          // (
-          //   (componentMeta.propType === 'string')
-          //     ?
-          //   "'"
-          //     :
-          //   ''
-          // )
-          //   +
-          (
-            (componentMeta.propType === 'shape' || componentMeta.propType === 'string') ?
-              JSON.stringify(componentMeta.propDefaultValue,null,1)
-              :
-              componentMeta.propDefaultValue
-          )
-          //   +
-          // (
-          //   (componentMeta.propType === 'string')
-          //     ?
-          //   "'"
-          //     :
-          //   ''
-          // )
-            +
-          "}"
-      }  ).join(' ') %> />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
