@@ -160,13 +160,13 @@ const getTestDataImport = type => {
     case 'RomanPropTypes.TrackerPlan':
       return 'import trackerPlan from \'roman-shared/src/tracker/testData/trackerPlan.json\'';
     case 'RomanPropTypes.TreatmentRecommendation':
-      return 'import treatmentRecommendation from \'roman-shared/src/treatmentRecommendation/testData/treatmentRecommendation.json\'';
+      return 'import treatmentRecommendation from \'roman-shared/src/treatment-recommendation/testData/treatmentRecommendation.json\'';
     case 'RomanPropTypes.TreatmentRecommendationItem':
-      return 'import treatmentRecommendationItem from \'roman-shared/src/treatmentRecommendation/testData/treatmentRecommendationItem.json\'';
+      return 'import treatmentRecommendationItem from \'roman-shared/src/treatment-recommendation/testData/treatmentRecommendationItem.json\'';
     case 'RomanPropTypes.TreatmentRequest':
-      return 'import treatmentRequest from \'roman-shared/src/treatmentRequest/testData/treatmentRequest.json\'';
+      return 'import treatmentRequest from \'roman-shared/src/treatment-request/testData/treatmentRequest.json\'';
     case 'RomanPropTypes.TreatmentRequestItem':
-      return 'import treatmentRequestItem from \'roman-shared/src/treatmentRequest/testData/treatmentRequestItem.json\'';
+      return 'import treatmentRequestItem from \'roman-shared/src/treatment-request/testData/treatmentRequestItem.json\'';
     case 'RomanPropTypes.User':
       return 'import user from \'roman-shared/src/user/testData/user.json\'';
 
@@ -343,7 +343,7 @@ module.exports = class extends Generator {
 
     for (let i = 0; i < metadata.length; i += 1) {
       const compMetaData = metadata[i];
-      const testPath = path.resolve(compMetaData.filePath, path.join('..', compMetaData.filename + '.tests.js'));
+      const testPath = path.resolve(compMetaData.filePath, path.join('..', compMetaData.filename + '.test.js'));
       const templatePath = this.options.template.length ? path.join(this.sourceRoot('.'), this.options.template) : 'index.template.js';
       this.fs.copyTpl(
         this.templatePath(templatePath),

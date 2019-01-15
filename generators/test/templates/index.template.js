@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import <%- componentInfo.displayName %> from '<%-relativeFilePath%>';
-<% if (testDataImports.length) { %><%-testDataImports.join(';\n')%><%- ';\n' %><% } %>
+<% if (testDataImports.length) { %><%-testDataImports.join(';\n')%><%- ';\n' %><% } %>import <%- componentInfo.displayName %> from '<%-relativeFilePath%>';
+
 describe('<<%-componentInfo.displayName%> />', () => {
   it('renders correctly', () => {
     const node = (
@@ -14,7 +14,7 @@ describe('<<%-componentInfo.displayName%> />', () => {
     return "        " + meta.propName + ((meta.propType === 'string' && meta.propDefaultValue) ? ('=' + meta.propDefaultValue + '') : ("={" + meta.propDefaultValue + "}"));
 }).join('\n') %><% if (hasChildren) { %>
       >
-        <div>I am children</div>
+        <div>I am child node</div>
       </<%- componentInfo.displayName%>><% } else { %>
       /><% } %>
     );
